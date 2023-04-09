@@ -16,12 +16,4 @@ async function UserSearchAll(
     }
 }
 
-// async function UserSearchAll() {
-//     const result = await prisma.user.findMany({
-//         select: { 
-//         name: true, 
-//         student_number:true}})
-//     return result
-// }
-
 export default UserSearchAll

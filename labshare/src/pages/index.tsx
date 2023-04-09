@@ -7,7 +7,7 @@ import UserPropsType from '@/types/UserProps';
 import APIConnect from "@/components/Atoms/APIConnect";
 
 
-export default function Home(response:UserPropsType[]) {
+export default function Home({response}:{response:UserPropsType[]}) {
   const { data: session, status } = useSession()
   if (status === 'loading') {
     return <div>Loading...</div>;
@@ -17,17 +17,40 @@ export default function Home(response:UserPropsType[]) {
   <>
   <Header></Header>
   </>
-  )}else{
+  )}
+  else{
     const now = new Date()
-    const year = Number(now.getFullYear().toString().slice(-2))
-
+    const month = now.getMonth()
+    let year = Number(now.getFullYear().toString().slice(-2))
+    if (month < 4){
+      year -= 1
+    }
+    const b3 = response.filter((res)=>{
+      return parseInt(res.student_number)+2 == year  && res.student_number[2] == "T"
+    })
+    const b4 = response.filter((res)=>{
+      return parseInt(res.student_number)+3 == year  && res.student_number[2] == "T"
+    })
+    const m1 = response.filter((res)=>{
+      return parseInt(res.student_number) == year  && res.student_number[2] == "G"
+    })
+    const m2 = response.filter((res)=>{
+      return parseInt(res.student_number)+1 == year  && res.student_number[2] == "G"
+    })
       return (
           <>
           <Header></Header>
           <h2>在学生</h2>
-          
-          <h2>卒業生</h2>
-          <ProfileLoop profilelist={response}/>
+          <h3>M2</h3>
+          <ProfileLoop profilelist={m2}/>
+          <h3>M1</h3>
+          <ProfileLoop profilelist={m1}/>
+          <h3>B4</h3>
+          <ProfileLoop profilelist={b4}/>
+          <h3>B3</h3>
+          <ProfileLoop profilelist={b3}/>
+          {/* <h2>卒業生</h2>
+          <ProfileLoop profilelist={response}/> */}
           </>
       )
   }
@@ -42,6 +65,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   if (user_data == null) {
       const message = await APIConnect("http://localhost:3000/api/db/UserCreate", create_user);
   }
-  const response:UserPropsType[] = await APIConnect("http://localhost:3000/api/db/UserSearchAll",{test:"test"})
+  const response = await APIConnect("http://localhost:3000/api/db/UserSearchAll",{test:"test"}) as UserPropsType[]
+  console.log(typeof response)
+  console.log(response)
   return {props:{response}}
 }
