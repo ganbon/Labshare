@@ -17,6 +17,7 @@ async function UserSearch(
         select: {
           id:true,
           student_number:true,
+          grade:true,
           password:true,
         },
       })
@@ -28,25 +29,5 @@ async function UserSearch(
   }
   }
 }
-
-
-
-// async function UserSearch(student_number:string) {
-//     const result = await prisma.user.findFirst({
-//         where: {
-//                 student_number:{contains:student_number},
-//         },
-//         select: {
-//           id:true,
-//           student_number:true,
-//           password:true,
-//         },
-//       })
-//     if(result){
-//       return result
-//     }else{
-//       return null
-//     }
-// }
 
 export default UserSearch

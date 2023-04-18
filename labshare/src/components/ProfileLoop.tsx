@@ -1,24 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
-import UserPropsType from '@/types/UserProps'   
+import UserPropsType from '@/types/UserProps'  
+import {Grid} from '@mui/material';
 
 // スレッドをループ処理によって複数表示する。
 const ProfileLoop : React.FC<{profilelist:UserPropsType[]}> = React.memo(({profilelist}) => {
     return(
       <>
       {profilelist.map((result) => { 
-        // if(result.student_number !== host){
         return(
             <>
+            <Grid item xs={8}>
             <a className="no-underline">
-            <Link 
-            href={{pathname:`/profile/${result.id}`}}>
-                <div>{result.name}</div>
+           <Link 
+            href={{pathname:`/profile/${result.id}`}} legacyBehavior>
+                <a style={{ textDecoration: 'none' }}><h4>・{result.name}</h4></a>
             </Link>
             </a>
+            </Grid>
             </>
         );
-        // }
     })}
     </>
     )

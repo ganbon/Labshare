@@ -18,7 +18,7 @@ model Post {
   content   String?  @db.Text
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
-  authorId  String      @unique
+  authorId  String   
 }
 
 model Profile {
@@ -31,8 +31,9 @@ model Profile {
 model User {
   id      String      @default(uuid())  @id
   student_number String @db.VarChar(6)
-  name    String?
-  password  String?
+  name    String
+  password  String
+  grade   String @db.VarChar(2)
   posts   Post[]
   profile Profile?
 }

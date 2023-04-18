@@ -10,8 +10,8 @@ async function UserSearchAll(
         select: { 
         id: true,
         name: true, 
+        grade:true,
         student_number:true}})
-        // console.log(result)
         res.status(200).json({response:result})
     }
 }

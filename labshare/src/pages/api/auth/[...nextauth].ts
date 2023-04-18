@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from "next-auth/providers/credentials";
-import APIConnect from '@/components/Atoms/APIConnect';
-import DecodeBase64 from '@/components/Atoms/CipherDecode';
+import APIConnect from '@/components/APIConnect';
+import DecodeBase64 from '@/components/CipherDecode';
 
 async function findUserByCredentials(credentials:any){
   // ログイン可能であればユーザidを返し、不可能であればnullを返す
@@ -11,7 +11,6 @@ async function findUserByCredentials(credentials:any){
     return null
   } else if(typeof login_data.password === "string"){
       const decodepass = DecodeBase64(login_data.password)
-      // console.log(decodepass)
       if (decodepass === credentials.password){
         return {email:login_data.id,name:login_data.student_number}
   }else{

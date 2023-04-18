@@ -19,15 +19,4 @@ async function PostSearch(
   }
 }
 
-// async function PostSearch(user_id:number) {
-//     const result = await prisma.post.findMany({
-//         where: {
-//             AND:[
-//                 {authorId:user_id},
-//                 {published:true}
-//             ]
-//         },
-//       })
-//     return result
-// }
 export default PostSearch

@@ -8,13 +8,13 @@ import type {
   } from 'next'
 import { useState,useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import MarkDownEditor from '@/components/Atoms/MarkdownEditer';
-import Header from '@/components/Atoms/Header'
-import Form from '@/components/Atoms/Form';
+import MarkDownEditor from '@/components/MarkdownEditer';
+import Header from '@/components/Header'
+import Form from '@/components/Form';
 import { useSession } from 'next-auth/react'
-import APIConnect from '@/components/Atoms/APIConnect';
+import APIConnect from '@/components/APIConnect';
 
-const ProfilePage:NextPage<any> = ({posts}) => {
+const PostPage:NextPage<any> = ({posts}) => {
   const {data:session,status} = useSession()
   const [content,setContents] = useState<string>(posts.content)
   const [title,setTitle] = useState<string>(posts.title)
@@ -30,8 +30,8 @@ const ProfilePage:NextPage<any> = ({posts}) => {
     <>
     <Header></Header>
     <Form title="タイトル" default={title} setWord={setTitle}/>
-    <div>作成日{posts.createAt}</div>
-    <div>更新日{posts.updateAt}</div>
+    <div>作成日{posts.createdAt.toString()}</div>
+    <div>更新日{posts.updatedAt.toString()}</div>
     <MarkDownEditor default={content} setMarkdown={setContents}/>
     </>
     )
@@ -62,4 +62,4 @@ export const getServerSideProps = async (
   }
 }
 
-export default ProfilePage
+export default PostPage

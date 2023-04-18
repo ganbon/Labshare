@@ -32,7 +32,7 @@ const AppBar = styled(MuiAppBar, {
 const Header = () => {
     const [open, setOpen] = React.useState(false);
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <div style = {{ width:"100%" }}>
       <AppBar position="static" open={open}>
         <Toolbar>
          <MenuButton open={open} setOpen={setOpen} />
@@ -43,7 +43,7 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       <PersistentDrawerLeft open={open} setOpen={setOpen}/>
-    </Box>
+    </div>
   );
 }
 

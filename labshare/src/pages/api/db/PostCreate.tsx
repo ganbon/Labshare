@@ -12,7 +12,7 @@ async function PostCreate(
                 typeof published !== 'boolean' ||typeof user_id !== 'string'){
                 res.status(405).json({result:"False"})
             } 
-            else{
+        else{
             await prisma.post.create({
                 data:{
                     title:title,
@@ -25,17 +25,5 @@ async function PostCreate(
         }
     }
 }
-
-
-// async function PostCreate(props:PostPropsType) {
-//     await prisma.post.create({
-//         data:{
-//             title:props.title,
-//             content:props.content,
-//             published:true,
-//             authorId:props.user_id,
-//         }
-//       })
-// }
 
 export default PostCreate

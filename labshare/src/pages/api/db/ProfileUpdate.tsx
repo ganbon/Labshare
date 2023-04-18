@@ -6,7 +6,7 @@ async function ProfileUpdate(
   res: NextApiResponse
   ){
     if (req.method === 'POST') {
-      const {id,name,number,abstract} = req.body
+      const {id,name,number,abstract,grade} = req.body
       if (typeof name !== "string" ||typeof number !== "string" 
       || typeof abstract !== "string" || typeof id !== "string"){
           res.status(405).json({result:null})
@@ -15,6 +15,7 @@ async function ProfileUpdate(
         where: {id:id},
         data : {name:name,
             student_number:number,
+            grade:grade,
             }
       })
     const result2 = await prisma.profile.update({

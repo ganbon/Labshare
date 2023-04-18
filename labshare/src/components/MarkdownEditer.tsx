@@ -8,7 +8,6 @@ import dynamic from "next/dynamic";
 type MarkdownProps = {
     setMarkdown:React.Dispatch<React.SetStateAction<string>>;
     default:string;
-    // Edit:(e:any) => void
 }
 
 export const MarkDownEditor = (props:MarkdownProps) => {

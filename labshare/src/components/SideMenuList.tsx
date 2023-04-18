@@ -3,8 +3,8 @@ import { List,ListItem,ListItemText } from '@mui/material';
 import Link from 'next/link';
 
 const SideMenuList = () => {
-  const menulist = ["ホーム","プロフィール","新規作成"]
-  const menupath = ["/","/user","/writing"]
+  const menulist = ["ホーム","新規作成"]
+  const menupath = ["/","/writing"]
   return (
     <>
       <List>

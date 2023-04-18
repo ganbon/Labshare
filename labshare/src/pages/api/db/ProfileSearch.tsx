@@ -21,14 +21,3 @@ async function ProfileSearch(
 }
 
 export default ProfileSearch
-
-
-// async function ProfileSearch(user_id:number) {
-//   const prisma = new PrismaClient()
-//   const result = await prisma.profile.findUnique({
-//       where: {id:user_id}
-//     })
-//   return result
-// }
-
-// export default ProfileSearch

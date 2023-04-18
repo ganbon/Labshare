@@ -1,4 +1,4 @@
-import Form from "@/components/Atoms/Form";
+import Form from "@/components/Form";
 import {TextField} from "@mui/material"
 import {useState} from "react"
 import type {
@@ -7,15 +7,17 @@ import type {
     NextPage,
   } from 'next'
 import Router from 'next/router'
-import APIConnect from "@/components/Atoms/APIConnect";
+import APIConnect from "@/components/APIConnect";
 import { Button } from "@mui/material";
+import SelectGrade from "@/components/Selectgrad";
 
-const ProfileEditPage:NextPage<any> = ({id,profile_name,profile_number,profile_abstract}) => {
+const ProfileEditPage:NextPage<any> = ({id,profile_name,profile_number,profile_grade,profile_abstract}) => {
     const [name,setName] = useState<string>(profile_name)
     const [number,setNumber] = useState<string>(profile_number)
+    const [grade,setGrade] = useState<string>(profile_grade)
     const [abstract,setAbstract] = useState<string>(profile_abstract)
     const Edit = async () => {
-        const result = await APIConnect("http://localhost:3000/api/db/ProfileUpdate",{id:id,name:name,number:number,abstract:abstract})
+        const result = await APIConnect("http://localhost:3000/api/db/ProfileUpdate",{id:id,name:name,number:number,grade:grade,abstract:abstract})
         console.log(result)
         await Router.push(`/profile/${id}`)
     }
@@ -27,6 +29,7 @@ const ProfileEditPage:NextPage<any> = ({id,profile_name,profile_number,profile_a
     <h1>プロフィール編集</h1>
       <Form title="名前" default={name} setWord={setName}/>
       <Form title="学籍番号" default={number} setWord={setNumber}/>
+      <SelectGrade grade={grade} setGrade={setGrade}/>
       <TextField
         fullWidth
         multiline

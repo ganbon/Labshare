@@ -1,5 +1,4 @@
 const APIConnect = async (url:string,requestdata:any) => {
-    // console.log(requestdata)
     const response = await fetch(url, {
       method: 'POST',
       headers: {

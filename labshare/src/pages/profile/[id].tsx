@@ -6,9 +6,9 @@ import type {
     GetServerSidePropsResult,
     NextPage,
   } from 'next'
-import APIConnect from '@/components/Atoms/APIConnect'
-import Header from '@/components/Atoms/Header'
-import PostLoop from '@/components/Atoms/PostLoop'
+import APIConnect from '@/components/APIConnect'
+import Header from '@/components/Header'
+import PostLoop from '@/components/PostLoop'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 const ProfilePage:NextPage<any> = ({user_profile}) => {
@@ -25,10 +25,12 @@ const ProfilePage:NextPage<any> = ({user_profile}) => {
                                           name:user_profile.name,
                                           number:user_profile.student_number,
                                           abstract:user_profile.profile.abstract}}}>
-                <div>編集</div>
+                <div>プロフィール編集</div>
     </Link>
       <h3>名前</h3>
       <div>{user_profile.name}</div>
+      <h3>学年</h3>
+      <div>{user_profile.grade}</div>
       <h3>学籍番号</h3>
       <div>{user_profile.student_number}</div>
       <h3>研究概要</h3>

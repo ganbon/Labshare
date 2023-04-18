@@ -1,5 +1,5 @@
 import prisma from './Client'
-import EncodeBase64 from '../../../components/Atoms/CipherEncode'
+import EncodeBase64 from '../../../components/CipherEncode'
 import { NextApiRequest, NextApiResponse } from "next";
 
 
@@ -11,7 +11,9 @@ async function UserCreate(
         const name = req.body.name
         const student_number = req.body.number
         const password = req.body.password
-        if(typeof name !== "string" || typeof student_number !=="string" || typeof password !== "string"){
+        const grade = req.body.grade
+        if(typeof name !== "string" || typeof student_number !=="string" || typeof password !== "string" 
+            || typeof grade !== "string"){
             res.status(405).json({response:"False"})
         }else{
         const passwords = EncodeBase64(password)
@@ -20,6 +22,7 @@ async function UserCreate(
                 name:name,
                 student_number:student_number,
                 password:passwords,
+                grade:grade,
                 profile:{
                     create:{abstract:""}
                 }
@@ -29,19 +32,5 @@ async function UserCreate(
     }
   }
 }
-
-// async function UserCreate(props:UserPropsType) {
-//     const passwords = EncodeBase64(props.password)
-//     await prisma.user.create({
-//         data:{
-//             name:props.name,
-//             student_number:props.student_number,
-//             password:passwords,
-//             profile:{
-//                 create:{abstract:""}
-//             }
-//         }
-//       })
-// }
 
 export default UserCreate
