@@ -10,6 +10,8 @@ services:
     links:
       - db
     tty: true
+    # environment:
+    #   - WATCHPACK_POLLING=true 開発用
       
   db:
     platform: linux/amd64

@@ -14,7 +14,6 @@ export const MarkDownEditor = (props:MarkdownProps) => {
     // const [markdown, setMarkdown] = useState('')
     const setOptions = useMemo(() => {
         return {
-            autofocus: true,
             spellChecker: false,
         };
       }, []);
@@ -22,7 +21,7 @@ export const MarkDownEditor = (props:MarkdownProps) => {
         <SimpleMDE
         onChange={e => props.setMarkdown(e)}
         value={props.default}
-        options={setOptions} 
+        options={setOptions as EasyMDE.Options} 
         />
         
     )
