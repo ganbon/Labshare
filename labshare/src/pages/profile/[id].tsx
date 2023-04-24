@@ -64,7 +64,7 @@ export const getServerSideProps = async (
   if (typeof userid !== 'string') {
     return { notFound: true }
   }else{
-    const user_profile = await APIConnect("http://localhost:3000/api/db/ProfileSearch",{id:userid})
+    const user_profile = await APIConnect(`${process.env.PUBLIC_URL}api/db/ProfileSearch`,{id:userid})
     console.log(user_profile)
     return { props: {user_profile} }
   }

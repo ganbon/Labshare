@@ -23,7 +23,7 @@ const PostPage:NextPage<any> = ({posts}) => {
   }else if(session?.user?.email==posts.authorId){
     useEffect(() => {
       (async() => {
-        await APIConnect("http://localhost:3000/api/db/PostUpdate",{id:posts.id,title:title,content:content})
+        await APIConnect(`${process.env.PUBLIC_URL}/api/db/PostUpdate`,{id:posts.id,title:title,content:content})
       })()
     },[title,content])
     return(
@@ -56,7 +56,7 @@ export const getServerSideProps = async (
   if (typeof post_id !== 'string') {
     return { notFound: true }
   }else{
-    const posts = await APIConnect("http://localhost:3000/api/db/PostSearch",{id:post_id})
+    const posts = await APIConnect(`${process.env.PUBLIC_URL}/api/db/PostSearch`,{id:post_id})
     console.log(posts)
     return { props: {posts} }
   }
