@@ -45,6 +45,8 @@ const ProfilePage:NextPage<any> = ({user_profile}) => {
       <Header></Header>
       <h3>名前</h3>
       <div>{user_profile.name}</div>
+      <h3>学年</h3>
+      <div>{user_profile.grade}</div>
       <h3>学籍番号</h3>
       <div>{user_profile.student_number}</div>
       <h3>研究概要</h3>
@@ -64,7 +66,7 @@ export const getServerSideProps = async (
   if (typeof userid !== 'string') {
     return { notFound: true }
   }else{
-    const user_profile = await APIConnect(`${process.env.PUBLIC_URL}api/db/ProfileSearch`,{id:userid})
+    const user_profile = await APIConnect(`${process.env.PUBLIC_URL}/api/db/ProfileSearch`,{id:userid})
     console.log(user_profile)
     return { props: {user_profile} }
   }

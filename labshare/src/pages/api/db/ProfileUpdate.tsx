@@ -6,7 +6,7 @@ async function ProfileUpdate(
   res: NextApiResponse
   ){
     if (req.method === 'POST') {
-      const {id,name,number,abstract,grade} = req.body
+      const {id,name,number,grade,abstract} = req.body
       if (typeof name !== "string" ||typeof number !== "string" 
       || typeof abstract !== "string" || typeof id !== "string"){
           res.status(405).json({result:null})

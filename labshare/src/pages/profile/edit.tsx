@@ -17,8 +17,7 @@ const ProfileEditPage:NextPage<any> = ({id,profile_name,profile_number,profile_g
     const [grade,setGrade] = useState<string>(profile_grade)
     const [abstract,setAbstract] = useState<string>(profile_abstract)
     const Edit = async () => {
-        const result = await APIConnect("http://localhost:3000/api/db/ProfileUpdate",{id:id,name:name,number:number,grade:grade,abstract:abstract})
-        console.log(result)
+        const result = await APIConnect(`/api/db/ProfileUpdate`,{id:id,name:name,number:number,grade:grade,abstract:abstract})
         await Router.push(`/profile/${id}`)
     }
     const Cancel = () => {
@@ -54,9 +53,10 @@ export const getServerSideProps = async (
     const id  = context.query.id
     const profile_number = context.query.number
     const profile_name = context.query.name
+    const profile_grade = context.query.grade
     const profile_abstract = context.query.abstract
     // 受け取ったパラメーターが意図した型でなければnotfoundページとして処理する
-    return {props:{id,profile_name,profile_number,profile_abstract}}
+    return {props:{id,profile_name,profile_number,profile_grade,profile_abstract}}
     }
     
 export default ProfileEditPage

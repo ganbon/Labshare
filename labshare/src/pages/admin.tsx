@@ -18,7 +18,7 @@ const AdminPage:NextPage = () => {
   }
   else if(session?.user?.name === process.env.NEXT_PUBLIC_ADMIN_NUMBER){
     const Create = async () => {
-      await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserCreate`,{name:name,number:student_number,password:password,grade:grade})
+      await APIConnect(`/api/db/UserCreate`,{name:name,number:student_number,password:password,grade:grade})
       await Router.push(`/`)
   }
       return (
