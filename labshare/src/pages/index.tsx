@@ -74,11 +74,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
                       number:process.env.NEXT_PUBLIC_ADMIN_NUMBER as string,
                       grade:process.env.NEXT_PUBLIC_ADMIN_GRADE as string,
                       password:process.env.NEXT_PUBLIC_ADMIN_PASS as string}
-  const user_data = await APIConnect("http://localhost:3000/api/db/UserSearch", search_user);
+  const user_data = await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserSearch`, search_user);
   if (user_data == null) {
-      const message = await APIConnect("http://localhost:3000/api/db/UserCreate", create_user);
+      const message = await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserCreate`, create_user);
   }
-  const response = await APIConnect("http://localhost:3000/api/db/UserSearchAll",{test:"test"}) as UserPropsType[]
+  const response = await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserSearchAll`,{test:"test"}) as UserPropsType[]
   console.log(typeof response)
   console.log(response)
   return {props:{response}}

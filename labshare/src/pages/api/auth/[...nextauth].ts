@@ -5,7 +5,7 @@ import DecodeBase64 from '@/components/CipherDecode';
 
 async function findUserByCredentials(credentials:any){
   // ログイン可能であればユーザidを返し、不可能であればnullを返す
-  const login_data = await APIConnect("http://localhost:3000/api/db/UserSearch",{number:credentials.user})
+  const login_data = await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserSearch`,{number:credentials.user})
   console.log(login_data)
   if (!login_data) {
     return null
@@ -21,6 +21,7 @@ async function findUserByCredentials(credentials:any){
 
 // NextAuth に渡すオプション
 export default NextAuth({
+     
     secret: process.env.NEXTAUTH_SECRET,
   // 認証プロバイダー
   providers: [

@@ -29,7 +29,7 @@ const WritingPage:NextPage = () => {
       }
       else if(session){
         const Create = async () => {
-            await APIConnect("http://localhost:3000/api/db/PostCreate",{title:title,content:contents,published:true,user_id:session.user.email})
+            await APIConnect(`${process.env.PUBLIC_URL}/api/db/PostCreate`,{title:title,content:contents,published:true,user_id:session.user.email})
             await Router.push(`/`)
         }
         return (
