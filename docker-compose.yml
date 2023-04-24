@@ -5,7 +5,7 @@ services:
     volumes:
       - ./labshare:/labshare
     ports:
-      - "3000:3000"
+      - "80:3000"
     # command: bash -c "cd labshare && yarn install"
     links:
       - db
