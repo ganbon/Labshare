@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const SideMenuList = () => {
   const menulist = ["ホーム","新規作成"]
-  const menupath = ["/","/writing"]
+  const menupath = [`${process.env.NEXT_PUBLIC_ROOTPATH}/`,`${process.env.NEXT_PUBLIC_ROOTPATH}/writing`]
   return (
     <>
       <List>

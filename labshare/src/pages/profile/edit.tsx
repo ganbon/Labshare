@@ -1,6 +1,6 @@
 import Form from "@/components/Form";
-import {TextField} from "@mui/material"
-import {useState} from "react"
+import {TextField,styled} from "@mui/material"
+import {useState,} from "react";
 import type {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
@@ -10,6 +10,13 @@ import Router from 'next/router'
 import APIConnect from "@/components/APIConnect";
 import { Button } from "@mui/material";
 import SelectGrade from "@/components/Selectgrad";
+import Head from "next/head";
+
+const TextForm = styled(TextField)((({ theme })  => ({
+    textContent: {
+      whiteSpace: "pre-line",
+    }
+  })));
 
 const ProfileEditPage:NextPage<any> = ({id,profile_name,profile_number,profile_grade,profile_abstract}) => {
     const [name,setName] = useState<string>(profile_name)
@@ -17,19 +24,22 @@ const ProfileEditPage:NextPage<any> = ({id,profile_name,profile_number,profile_g
     const [grade,setGrade] = useState<string>(profile_grade)
     const [abstract,setAbstract] = useState<string>(profile_abstract)
     const Edit = async () => {
-        const result = await APIConnect(`/api/db/ProfileUpdate`,{id:id,name:name,number:number,grade:grade,abstract:abstract})
-        await Router.push(`/profile/${id}`)
+        const result = await APIConnect(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/db/ProfileUpdate`,{id:id,name:name,number:number,grade:grade,abstract:abstract})
+        await Router.push(`${process.env.NEXT_PUBLIC_ROOTPATH}/profile/${id}`)
     }
     const Cancel = () => {
-       Router.push(`/profile/${id}`)
+       Router.push(`${process.env.NEXT_PUBLIC_ROOTPATH}/profile/${id}`)
     }
     return (
     <>
+    <Head>
+  <title>Lab Share</title>
+  </Head>
     <h1>プロフィール編集</h1>
       <Form title="名前" default={name} setWord={setName}/>
       <Form title="学籍番号" default={number} setWord={setNumber}/>
       <SelectGrade grade={grade} setGrade={setGrade}/>
-      <TextField
+      <TextForm
         fullWidth
         multiline
         rows={5}

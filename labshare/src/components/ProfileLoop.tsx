@@ -13,7 +13,7 @@ const ProfileLoop : React.FC<{profilelist:UserPropsType[]}> = React.memo(({profi
             <Grid item xs={8}>
             <a className="no-underline">
            <Link 
-            href={{pathname:`/profile/${result.id}`}} legacyBehavior>
+            href={{pathname:`${process.env.NEXT_PUBLIC_ROOTPATH}/profile/${result.id}`}} legacyBehavior>
                 <a style={{ textDecoration: 'none' }}><h4>・{result.name}</h4></a>
             </Link>
             </a>

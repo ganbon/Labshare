@@ -1,11 +1,13 @@
-import prisma from "./Client"
+import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from 'next'
+
 
 async function UserSearch(
   req: NextApiRequest,
   res: NextApiResponse
   ) {
     if (req.method === 'POST') {
+      const prisma = new PrismaClient()
       const student_number = req.body.number
       if (typeof student_number !== "string"){
         res.status(405).json({user:null})
@@ -26,6 +28,7 @@ async function UserSearch(
     }else{
       res.status(200).json({response:null})
     }
+    await prisma.$disconnect()
   }
   }
 }

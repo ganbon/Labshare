@@ -10,7 +10,7 @@ const PostLoop : React.FC<{postlist:PostPropsType[]}> = React.memo(({postlist}) 
         return(
             <>
             <Link 
-            href={{pathname:`/post/${result.id}`}} legacyBehavior>
+            href={{pathname:`${process.env.NEXT_PUBLIC_ROOTPATH}/post/${result.id}`}} legacyBehavior>
                 <a style={{ textDecoration: 'none' }}><h4>{result.title}</h4></a>
             </Link>
             </>

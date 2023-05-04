@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { GetServerSideProps } from "next";
 import UserPropsType from '@/types/UserProps';
 import {Grid} from '@mui/material';
+import Head from 'next/head';
 import APIConnect from "@/components/APIConnect";
 
 
@@ -16,6 +17,9 @@ export default function Home({response}:{response:UserPropsType[]}) {
   if(!session){
   return (
   <>
+  <Head>
+  <title>Lab Share</title>
+  </Head>
   <Header></Header>
   </>
   )}
@@ -37,6 +41,9 @@ export default function Home({response}:{response:UserPropsType[]}) {
     })  
       return (
           <>
+          <Head>
+          <title>Lab Share</title>
+          </Head>
           <Header></Header>
           <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={8}>
@@ -74,11 +81,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
                       number:process.env.NEXT_PUBLIC_ADMIN_NUMBER as string,
                       grade:process.env.NEXT_PUBLIC_ADMIN_GRADE as string,
                       password:process.env.NEXT_PUBLIC_ADMIN_PASS as string}
-  const user_data = await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserSearch`, search_user);
+  const user_data = await APIConnect(`${process.env.HOST_URL}/api/db/UserSearch`, search_user);
   if (user_data == null) {
-      const message = await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserCreate`, create_user);
+      const message = await APIConnect(`${process.env.HOST_URL}/api/db/UserCreate`, create_user);
   }
-  const response = await APIConnect(`${process.env.PUBLIC_URL}/api/db/UserSearchAll`,{test:"test"}) as UserPropsType[]
+  const response = await APIConnect(`${process.env.HOST_URL}/api/db/UserSearchAll`,{test:"test"}) as UserPropsType[]
   console.log(typeof response)
   console.log(response)
   return {props:{response}}
