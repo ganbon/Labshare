@@ -1,6 +1,3 @@
-
-
-
 import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
@@ -34,10 +31,10 @@ if (status === 'loading') {
                                         abstract:user_profile.profile.abstract}}}>
               <div>プロフィール編集</div>
   </Link>
-  <Link
+  {/* <Link
   href={{pathname:`${process.env.NEXT_PUBLIC_ROOTPATH}/profile/passedit`,query:{id:user_profile.id}}}>
               <div>パスワード変更</div>
-  </Link>
+  </Link> */}
     <h3>名前</h3>
     <div>{user_profile.name}</div>
     <h3>学年</h3>

@@ -1,6 +1,3 @@
-
-
-
 import type {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
