@@ -16,7 +16,7 @@ const {data:session,status} = useSession()
 if (status === 'loading') {
   return <div>Loading...</div>;
 }else if(session?.user?.email==user_profile.id){
-
+ console.log(user_profile)
   return(
   <>
   <Head>
@@ -44,10 +44,11 @@ if (status === 'loading') {
     <h3>研究概要</h3>
     <div>{user_profile.profile.abstract.split('\n').map(x => (<div>{x}</div>))}</div>
     <h3>記録一覧</h3>
-    <PostLoop postlist = {user_profile.posts}/> 
+    <PostLoop postlist = {user_profile.posts.sort((x,y) => (x.createdAt) - (y.createdAt),)}/> 
   </>
   )
 }else{
+  console.log(user_profile)
   return (
     <>
     <Header></Header>
@@ -60,7 +61,7 @@ if (status === 'loading') {
     <h3>研究概要</h3>
     <div>{user_profile.profile.abstract.split('\n').map(x => (<div>{x}</div>))}</div>
     <h3>記録一覧</h3>
-    <PostLoop postlist = {user_profile.posts}/> 
+    <PostLoop postlist =  {user_profile.posts.sort((x,y) => (x.createdAt.getTime()) - (y.createdAt.getTime()),)}/> 
     </>
   )
 }
