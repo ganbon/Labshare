@@ -16,7 +16,6 @@ const {data:session,status} = useSession()
 if (status === 'loading') {
   return <div>Loading...</div>;
 }else if(session?.user?.email==user_profile.id){
- console.log(user_profile)
   return(
   <>
   <Head>
@@ -48,7 +47,6 @@ if (status === 'loading') {
   </>
   )
 }else{
-  console.log(user_profile)
   return (
     <>
     <Header></Header>
