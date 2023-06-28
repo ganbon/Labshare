@@ -61,7 +61,6 @@ if (typeof post_id !== 'string') {
   return { notFound: true }
 }else{
   const posts = await APIConnect(`${process.env.HOST_URL}/api/db/PostSearch`,{id:post_id})
-  console.log(posts)
   return { props: {posts} }
 }
 }
