@@ -1,4 +1,4 @@
-import prisma from './Client'
+import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function PostCreate(
@@ -7,6 +7,7 @@ async function PostCreate(
     )
     {
         if (req.method === 'POST') {
+            const prisma = new PrismaClient()
             const {title,content,published,user_id} = req.body
             if(typeof title !== "string" || typeof content !=="string" || 
                 typeof published !== 'boolean' ||typeof user_id !== 'string'){
@@ -22,6 +23,7 @@ async function PostCreate(
                 }
             })
             res.status(200).json({response:"True"})
+            await prisma.$disconnect()
         }
     }
 }

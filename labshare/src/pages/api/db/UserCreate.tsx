@@ -1,4 +1,4 @@
-import prisma from './Client'
+import { PrismaClient } from "@prisma/client";
 import EncodeBase64 from '../../../components/CipherEncode'
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -8,6 +8,7 @@ async function UserCreate(
     res: NextApiResponse
     ) {
     if (req.method === 'POST') {
+        const prisma = new PrismaClient()
         const name = req.body.name
         const student_number = req.body.number
         const password = req.body.password
@@ -29,6 +30,7 @@ async function UserCreate(
             }
         })
         res.status(200).json({response:"True"})
+        await prisma.$disconnect()
     }
   }
 }

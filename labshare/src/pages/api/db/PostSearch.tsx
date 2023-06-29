@@ -1,4 +1,4 @@
-import prisma from "./Client"
+import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function PostSearch(
@@ -7,6 +7,7 @@ async function PostSearch(
     )
     {
     if (req.method === 'POST') {
+      const prisma = new PrismaClient()
     const post_id = req.body.id
     if (typeof post_id !== "string"){
         res.status(405).json({result:null})
@@ -15,6 +16,7 @@ async function PostSearch(
         where: {id:post_id},
       })
     res.status(200).json({response:result})
+    await prisma.$disconnect()
     }
   }
 }

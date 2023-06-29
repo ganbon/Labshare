@@ -3,11 +3,11 @@ import Router from "next/router";
 import Header from "@/components/Header";
 import MarkDownEditor from "@/components/MarkdownEditer";
 import {useState} from "react"
-import { styled } from '@mui/material/styles';
 import LongForm from "@/components/LongForm";
 import { Button,Grid,Box} from "@mui/material";
 import APIConnect from "@/components/APIConnect";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 const WritingPage:NextPage = () => {
     // const FixButton = styled(Button)(((theme) => ({
     //       position: 'fixed',
@@ -29,11 +29,14 @@ const WritingPage:NextPage = () => {
       }
       else if(session){
         const Create = async () => {
-            await APIConnect(`${process.env.PUBLIC_URL}/api/db/PostCreate`,{title:title,content:contents,published:true,user_id:session.user.email})
-            await Router.push(`/`)
+            await APIConnect(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/db/PostCreate`,{title:title,content:contents,published:true,user_id:session.user.email})
+            await Router.push(`${process.env.NEXT_PUBLIC_ROOTPATH}/`)
         }
         return (
         <>
+        <Head>
+        <title>Lab Share</title>
+        </Head>
         <Header></Header>
         <Grid container justifyContent="flex-end" alignItems="center" spacing={0.5}> 
         <Grid item xs={4} alignItems="center" style={{ padding: 20 }}>
@@ -68,6 +71,9 @@ const WritingPage:NextPage = () => {
     )}else{
         return(
         <>
+        <Head>
+  <title>error</title>
+  </Head>
           無効なページです
         </>
         )
