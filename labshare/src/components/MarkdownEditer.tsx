@@ -1,6 +1,5 @@
-import React, { useState,useMemo } from "react"
+import React, { useMemo } from "react"
 // import SimpleMDE from 'react-simplemde-editor'
-import ImageURL from "./ImageURL";
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false });
 import 'easymde/dist/easymde.min.css'
 import dynamic from "next/dynamic";
@@ -21,7 +20,7 @@ export const MarkDownEditor = (props:MarkdownProps) => {
           });
           const data = await response.json();
         console.log(data)
-        const imageurl = "/image/" + data.fileName
+        const imageurl = `${process.env.NEXT_PUBLIC_ROOTPATH}/image/` + data.fileName
         console.log(imageurl)
         props.setMarkdown((preMarkdown) => {
             return preMarkdown + `![image](${imageurl})`
