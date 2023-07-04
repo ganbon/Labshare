@@ -13,6 +13,7 @@ import Head from 'next/head'
 const ProfilePage:NextPage<any> = ({user_profile}) => {
 
 const {data:session,status} = useSession()
+console.log(user_profile.posts[0].createdAt.toLocaleString())
 if (status === 'loading') {
   return <div>Loading...</div>;
 }else if(session?.user?.email==user_profile.id){
@@ -43,12 +44,15 @@ if (status === 'loading') {
     <h3>研究概要</h3>
     <div>{user_profile.profile.abstract.split('\n').map(x => (<div>{x}</div>))}</div>
     <h3>記録一覧</h3>
-    <PostLoop postlist = {user_profile.posts.sort((x,y) => (x.createdAt) - (y.createdAt),)}/> 
+    <PostLoop postlist = {user_profile.posts.sort((x,y) => new Date(x.createdAt).getTime() - new Date(y.createdAt).getTime(),)}/> 
   </>
   )
 }else{
   return (
     <>
+    <Head>
+  <title>Lab Share</title>
+  </Head>
     <Header></Header>
     <h3>名前</h3>
     <div>{user_profile.name}</div>
@@ -59,7 +63,7 @@ if (status === 'loading') {
     <h3>研究概要</h3>
     <div>{user_profile.profile.abstract.split('\n').map(x => (<div>{x}</div>))}</div>
     <h3>記録一覧</h3>
-    <PostLoop postlist =  {user_profile.posts.sort((x,y) => (x.createdAt.getTime()) - (y.createdAt.getTime()),)}/> 
+    <PostLoop postlist =  {user_profile.posts.sort((x,y) => new Date(x.createdAt).getTime() - new Date(y.createdAt).getTime(),)}/> 
     </>
   )
 }
